@@ -5,3 +5,5 @@
 /dist/
 /.idea/
 /out/
+/test/
+/derby.log
