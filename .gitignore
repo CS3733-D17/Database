@@ -1,3 +1,7 @@
-/manifest.mf
-/build.xml
 /nbproject/
+/build.xml
+/manifest.mf
+/build/
+/dist/
+/.idea/
+/out/
