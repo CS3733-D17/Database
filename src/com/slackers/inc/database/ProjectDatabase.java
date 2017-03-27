@@ -6,6 +6,8 @@
 package com.slackers.inc.database;
 
 import com.slackers.inc.database.entites.LabelApplication;
+
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +35,11 @@ public class ProjectDatabase{
             db.createTable(app1.getTableName(), app1.tableColumnCreationSettings());
         }
         System.out.println(app1);
-        
+
+        for(int i = 0; i < 30; i++){
+            db.writeEntity(getRandomApplication());
+        }
+
         db.writeEntity(app1, "BeverageName");
         db.getEntity(app1, "BeverageName");
         System.out.println(app1);
@@ -46,7 +52,15 @@ public class ProjectDatabase{
         db.closeConnection();
         db.shutdownDb();
     }
-    
-    
+
+    static int index = 1;
+
+   public static LabelApplication getRandomApplication(){
+       String beverageName = "Beer #" + index;
+       String companyName = "Company #" + index;
+       index++;
+       return new LabelApplication(beverageName, beverageName);
+   }
+
     
 }
