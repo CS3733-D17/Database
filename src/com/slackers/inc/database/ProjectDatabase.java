@@ -5,12 +5,9 @@
  */
 package com.slackers.inc.database;
 
-import com.slackers.inc.database.entites.LabelApplication;
+import com.slackers.inc.database.entities.LabelApplication;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  *

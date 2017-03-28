@@ -5,7 +5,7 @@
  */
 package com.slackers.inc.database;
 
-import com.slackers.inc.database.entites.IEntity;
+import com.slackers.inc.database.entities.IEntity;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
