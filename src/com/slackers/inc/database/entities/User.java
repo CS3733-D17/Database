@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Matt on 3/28/2017.
- */
 public class User implements IEntity {
 
     private static final String TABLE_NAME = "USERLOGINS";
@@ -18,7 +15,7 @@ public class User implements IEntity {
     private String phoneNumber;
     private String emailAddress;
     private Boolean isManufacturer;
-    private String password; // very safe
+    private String password;
     private String brandName;
 
     public User(){
@@ -27,9 +24,8 @@ public class User implements IEntity {
 
     @Override
     public String getTableName() {
-        return TABLE_NAME;
+        return "USERLOGINS";
     }
-
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
@@ -47,11 +43,32 @@ public class User implements IEntity {
 
     @Override
     public void setEntityValues(Map<String, Object> values) {
-        if(values.get("id") != null) {
-
+        if(values.get("id") != null){
+            id = (Integer) values.get("id");
         }
-        if(false){
-
+        if(values.get("FirstName") != null){
+            firstName = (String) values.get("FirstName");
+        }
+        if(values.get("LastName") != null){
+            lastName = (String) values.get("LastName");
+        }
+        if(values.get("PhysicalAddress") != null){
+            physicalAddress = (String) values.get("PhysicalAddress");
+        }
+        if(values.get("PhoneNumber") != null){
+            phoneNumber = (String) values.get("PhoneNumber");
+        }
+        if(values.get("EmailAddress") != null){
+            emailAddress = (String) values.get("EmailAddress");
+        }
+        if(values.get("IsManufacturer") != null){
+            isManufacturer = (Boolean) values.get("IsManufacturer");
+        }
+        if(values.get("Password") != null){
+            password = (String) values.get("Password");
+        }
+        if(values.get("BrandName") != null){
+            brandName = (String) values.get("BrandName");
         }
     }
 
@@ -72,10 +89,12 @@ public class User implements IEntity {
 
     @Override
     public List<String> tableColumnCreationSettings() {
-        return null; // not sure how to do this
+        return null; // TODO: this method
     }
 
+    @Override
     public int getId(){
         return id;
     }
+
 }
