@@ -75,15 +75,15 @@ public class DerbyConnection {
         return false;
     }
     
-    public void createTable(String tableName, List<String> columns) throws SQLException
+    public boolean createTable(String tableName, List<String> columns) throws SQLException
     {        
         String stmt = String.format("CREATE TABLE %s (%s)", tableName, String.join(", ", columns));
         CallableStatement call = con.prepareCall(stmt);
-        call.execute();
+        return call.execute();
     }
     
     
-    public void createEntity(IEntity entity) throws SQLException
+    public boolean createEntity(IEntity entity) throws SQLException
     {
         StringBuilder cols = new StringBuilder();
         StringBuilder vPlace = new StringBuilder();
@@ -112,13 +112,13 @@ public class DerbyConnection {
             DerbyConnection.setStatementValue(call, i, o);
             i++;
         }        
-        call.execute();
+        return call.execute();
     }
     
-    public void deleteEntity(IEntity entity, String... searchColumns) throws SQLException
+    public boolean deleteEntity(IEntity entity, String... searchColumns) throws SQLException
     {
         if (searchColumns.length<=0)
-            return; // avoid table deletion
+            return false; // avoid table deletion
         Set<String> cols = new HashSet<>(Arrays.asList(searchColumns));
         StringBuilder conds = new StringBuilder();
         List<Object> vals = new LinkedList<>();
@@ -148,13 +148,13 @@ public class DerbyConnection {
             DerbyConnection.setStatementValue(call, i, o);
             i++;
         }        
-        call.execute();
+        return call.execute();
     }
     
-    public void updateEntity(IEntity entity, String... searchColumns) throws SQLException
+    public boolean updateEntity(IEntity entity, String... searchColumns) throws SQLException
     {
         if (searchColumns.length<=0)
-            return; // avoid table deletion
+            return false; // avoid table deletion
         Set<String> cols = new HashSet<>(Arrays.asList(searchColumns));
         StringBuilder conds = new StringBuilder();
         
@@ -204,7 +204,7 @@ public class DerbyConnection {
             DerbyConnection.setStatementValue(call, i, o);
             i++;
         }        
-        call.execute();
+        return call.execute();
     }
     
     public boolean entityExists(IEntity entity, String... searchColumns) throws SQLException
@@ -299,12 +299,12 @@ public class DerbyConnection {
         }
     }
 
-    public void writeEntity(IEntity entity, String... searchColumns) throws SQLException
+    public boolean writeEntity(IEntity entity, String... searchColumns) throws SQLException
     {
         if (this.entityExists(entity, searchColumns))
-            this.updateEntity(entity, searchColumns);
+            return this.updateEntity(entity, searchColumns);
         else
-            this.createEntity(entity);
+            return this.createEntity(entity);
     }
     
     private static void setStatementValue(CallableStatement stmt, int index, Object obj) throws SQLException
