@@ -1,18 +1,13 @@
 # --------------------------
 # Fill in these slots
-class_name = 'User'
+class_name = 'ProcessedApplication'
 # the name of the table that the entity is stored in
-table_name = 'USERLOGINS'
+table_name = 'PROCESSEDAPPS'
 # the type of each attribute and their names
-attribute_types_and_names = [('Integer', 'userId'),
-                             ('String', 'firstName'),
-                             ('String', 'lastName'),
-                             ('String', 'physicalAddress'),
-                             ('String', 'phoneNumber'),
-                             ('String', 'emailAddress'),
-                             ('Boolean', 'isManufacturer'),
-                             ('String', 'password'),
-                             ('String', 'brandName')]
+attribute_types_and_names = [('Integer', 'id'),
+                             ('Integer', 'applicationId'),
+                             ('Boolean', 'isAccepted'),
+                             ('Date', 'dateProcessed')]
 # --------------------------
 
 def capitalize_for_hashmap(attribute_name, account_for_id=False):

@@ -6,8 +6,10 @@
 package com.slackers.inc.database;
 
 import com.slackers.inc.database.entities.LabelApplication;
+import com.slackers.inc.database.entities.ProcessedApplication;
 import com.slackers.inc.database.entities.User;
 
+import java.awt.*;
 import java.sql.SQLException;
 
 /**
@@ -37,18 +39,26 @@ public class ProjectDatabase{
                 .setFirstName("Bob")
                 .setLastName("the Builder")
                 .setBrandName("")
-                .setIsManufacturer(true)
                 .setPhysicalAddress("")
-                .setPhoneNumber("")
                 .setUserId(1);
-        db.createEntity(bobTheBuilder);
+        //db.createEntity(bobTheBuilder);
 
         System.out.println("\nBob is now in the database.");
         System.out.println("Bob can log in : "
                            + verify.verifyCredentials("bob@thebuilder.com", "build"));
 
         for(int i = 0; i < 30; i++){
-            db.writeEntity(getRandomApplication());
+            LabelApplication app = getRandomApplication();
+            db.writeEntity(app);
+            if(i < 7){ // reject the first seven
+                db.getEntity(app, "BeverageName");
+                ProcessedApplication processed = new ProcessedApplication()
+                        .setDateProcessedToToday()
+                        .setApplicationId(app.getId())
+                        .setId(-1)
+                        .setIsAccepted(false);
+                db.createEntity(processed);
+            }
         }
 
         db.shutdownDb();
@@ -60,7 +70,7 @@ public class ProjectDatabase{
        String beverageName = "Beer #" + index;
        String companyName = "Company #" + index;
        index++;
-       return new LabelApplication(beverageName, beverageName);
+       return new LabelApplication(beverageName, companyName);
    }
 
     
