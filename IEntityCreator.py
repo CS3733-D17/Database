@@ -15,8 +15,8 @@ attribute_types_and_names = [('Integer', 'id'),
                              ('String', 'brandName')]
 # --------------------------
 
-def capitalize_for_hashmap(attribute_name):
-    if attribute_name == 'id':
+def capitalize_for_hashmap(attribute_name, account_for_id=False):
+    if attribute_name == 'id' and not account_for_id:
         return attribute_name
     return attribute_name[0].upper() + attribute_name[1:]
 
@@ -45,8 +45,19 @@ for type, name in attribute_types_and_names:
 code += '''
 \tpublic {class_name}(){{
 
-\t}}
+\t}}\n
 '''.format(class_name=class_name)
+
+# getters and setters
+for type, name in attribute_types_and_names:
+    code += '\tpublic {0} get{1}() {{\n'.format(type, capitalize_for_hashmap(name, True))
+    code += '\t\treturn {0};\n'.format(name)
+    code += '\t}\n\n'
+    code += '\tpublic {0} set{1}({2} newVal) {{\n'\
+        .format(class_name, capitalize_for_hashmap(name, True), type)
+    code += '\t\t{0} = newVal;\n'.format(name)
+    code += '\t\treturn this;\n'
+    code += '\t}\n\n'
 
 
 # getTableName
@@ -109,12 +120,8 @@ code += '''\t@Override
 \t}
 '''
 
-code += '''
-\t@Override
-\tpublic int getId(){
-\t\treturn id;
-\t}
 
+code += '''
 }
 '''
 

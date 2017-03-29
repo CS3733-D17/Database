@@ -22,6 +22,88 @@ public class User implements IEntity {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public User setId(Integer newVal) {
+        id = newVal;
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public User setFirstName(String newVal) {
+        firstName = newVal;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String newVal) {
+        lastName = newVal;
+        return this;
+    }
+
+    public String getPhysicalAddress() {
+        return physicalAddress;
+    }
+
+    public User setPhysicalAddress(String newVal) {
+        physicalAddress = newVal;
+        return this;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public User setPhoneNumber(String newVal) {
+        phoneNumber = newVal;
+        return this;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public User setEmailAddress(String newVal) {
+        emailAddress = newVal;
+        return this;
+    }
+
+    public Boolean getIsManufacturer() {
+        return isManufacturer;
+    }
+
+    public User setIsManufacturer(Boolean newVal) {
+        isManufacturer = newVal;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public User setPassword(String newVal) {
+        password = newVal;
+        return this;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public User setBrandName(String newVal) {
+        brandName = newVal;
+        return this;
+    }
+
+
     @Override
     public String getTableName() {
         return "USERLOGINS";
@@ -90,11 +172,6 @@ public class User implements IEntity {
     @Override
     public List<String> tableColumnCreationSettings() {
         return null; // TODO: this method
-    }
-
-    @Override
-    public int getId(){
-        return id;
     }
 
 }
