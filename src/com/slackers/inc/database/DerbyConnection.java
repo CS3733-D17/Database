@@ -12,13 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
@@ -233,6 +227,7 @@ public class DerbyConnection {
             }
         }
         String stmt = String.format("SELECT * FROM %s WHERE %s", entity.getTableName(), conds.toString());
+        System.out.println(stmt);
         CallableStatement call = con.prepareCall(stmt);
         int i = 1;
         for (Object o : vals)
@@ -301,6 +296,7 @@ public class DerbyConnection {
 
     public boolean writeEntity(IEntity entity, String... searchColumns) throws SQLException
     {
+        System.out.println(this.entityExists(entity, searchColumns));
         if (this.entityExists(entity, searchColumns))
             return this.updateEntity(entity, searchColumns);
         else
@@ -311,7 +307,7 @@ public class DerbyConnection {
     {
         if (obj == null)
         {
-            stmt.setNull(index, java.sql.Types.NULL);
+            stmt.setNull(index, Types.NULL);
         }
         else if (obj instanceof Integer)
         {
@@ -320,6 +316,10 @@ public class DerbyConnection {
         else if (obj instanceof Short)
         {
             stmt.setShort(index, (Short)obj);
+        }
+        else if (obj instanceof Boolean)
+        {
+            stmt.setBoolean(index, (Boolean)obj);
         }
         else if (obj instanceof String)
         {
@@ -367,6 +367,10 @@ public class DerbyConnection {
         else if (target.isAssignableFrom(Long.class))
         {
             valueCollection.put(colTitle, result.getLong(colTitle));
+        }
+        else if (target.isAssignableFrom(Boolean.class))
+        {
+            valueCollection.put(colTitle, result.getBoolean(colTitle));
         }
         else if (target.isAssignableFrom(Serializable.class))
         {

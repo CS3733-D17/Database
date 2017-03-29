@@ -3,6 +3,7 @@ package com.slackers.inc.database.entities;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public class ProcessedApplication implements IEntity {
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
-        out.put("id", id);
+        //out.put("id", id);
         out.put("ApplicationId", applicationId);
         out.put("IsAccepted", isAccepted);
         out.put("DateProcessed", dateProcessed);
@@ -103,7 +104,12 @@ public class ProcessedApplication implements IEntity {
 
     @Override
     public List<String> tableColumnCreationSettings() {
-        return null; // TODO: this method
+        List<String> cols = new LinkedList<>();
+        cols.add("Id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)");
+        cols.add("ApplicationId int");
+        cols.add("IsAccepted boolean");
+        cols.add("DateProcessed Date");
+        return cols;
     }
 
 }

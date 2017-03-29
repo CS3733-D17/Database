@@ -26,22 +26,27 @@ public class ProjectDatabase{
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
 
+
         DerbyConnection db = DerbyConnection.getInstance();
         LoginVerification verify = new LoginVerification();
+
+//        db.deleteEntity(new User().setEmailAddress("bob@thebuilder.com"), "EmailAddress");
 
         System.out.println("Bob is not in the database.");
         System.out.println("Bob can log in : "
                            + verify.verifyCredentials("bob@thebuilder.com", "build"));
 
         User bobTheBuilder = new User()
-                .setEmailAddress("bob@thebuilder.com")
-                .setPassword("build")
-                .setFirstName("Bob")
-                .setLastName("the Builder")
                 .setBrandName("")
+                .setFirstName("")
+                .setIsManufacturer(true)
+                .setLastName("")
+                .setPhoneNumber("")
                 .setPhysicalAddress("")
-                .setUserId(1);
-        //db.createEntity(bobTheBuilder);
+                .setUserId(1)
+                .setEmailAddress("bob@thebuilder.com")
+                .setPassword("build");
+        db.writeEntity(bobTheBuilder, "EmailAddress");
 
         System.out.println("\nBob is now in the database.");
         System.out.println("Bob can log in : "
@@ -49,17 +54,18 @@ public class ProjectDatabase{
 
         for(int i = 0; i < 30; i++){
             LabelApplication app = getRandomApplication();
-            db.writeEntity(app);
+            db.writeEntity(app, "BeverageName");
             if(i < 7){ // reject the first seven
                 db.getEntity(app, "BeverageName");
                 ProcessedApplication processed = new ProcessedApplication()
                         .setDateProcessedToToday()
-                        .setApplicationId(app.getId())
                         .setId(-1)
+                        .setApplicationId(app.getId())
                         .setIsAccepted(false);
-                db.createEntity(processed);
+                db.writeEntity(processed, "ApplicationId");
             }
         }
+
 
         db.shutdownDb();
     }

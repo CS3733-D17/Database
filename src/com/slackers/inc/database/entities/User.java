@@ -1,6 +1,7 @@
 package com.slackers.inc.database.entities;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +112,7 @@ public class User implements IEntity {
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
-        out.put("UserId", userId);
+        //out.put("UserId", userId);
         out.put("FirstName", firstName);
         out.put("LastName", lastName);
         out.put("PhysicalAddress", physicalAddress);
@@ -171,7 +172,17 @@ public class User implements IEntity {
 
     @Override
     public List<String> tableColumnCreationSettings() {
-        return null; // TODO: this method
+        List<String> cols = new LinkedList<>();
+        cols.add("UserId int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)");
+        cols.add("FirstName varchar(128)");
+        cols.add("LastName varchar(128)");
+        cols.add("PhysicalAddress varchar(128)");
+        cols.add("PhoneNumber varchar(128)");
+        cols.add("EmailAddress varchar(128)");
+        cols.add("Password varchar(128)");
+        cols.add("BrandName varchar(128)");
+        cols.add("IsManufacturer int");
+        return cols;
     }
 
     @Override
