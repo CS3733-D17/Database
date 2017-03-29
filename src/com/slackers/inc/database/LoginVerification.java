@@ -19,6 +19,7 @@ public class LoginVerification {
     public boolean verifyCredentials(String email, String password){
         User user = new User().setEmailAddress(email);
 
+        return false;
     }
 
 
