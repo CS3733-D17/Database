@@ -9,17 +9,23 @@ import java.sql.SQLException;
  */
 public class LoginVerification {
 
-    DerbyConnection db;
+    private DerbyConnection db;
 
     public LoginVerification() throws SQLException {
         db = DerbyConnection.getInstance();
     }
 
     // returns true if the credentials are valid, and false otherwise
-    public boolean verifyCredentials(String email, String password){
+    public boolean verifyCredentials(String email, String password) throws SQLException {
         User user = new User().setEmailAddress(email);
+        try {
+            db.getEntity(user, "EmailAddress");
+        } catch (SQLException e) {
+            System.out.println("Trouble accessing database for login verification");
+            throw e;
+        }
 
-        return false;
+        return password.equals(user.getPassword());
     }
 
 

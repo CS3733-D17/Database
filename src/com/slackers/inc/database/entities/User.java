@@ -8,7 +8,7 @@ public class User implements IEntity {
 
     private static final String TABLE_NAME = "USERLOGINS";
 
-    private Integer id;
+    private Integer userId;
     private String firstName;
     private String lastName;
     private String physicalAddress;
@@ -22,12 +22,12 @@ public class User implements IEntity {
 
     }
 
-    public int getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public User setId(Integer newVal) {
-        id = newVal;
+    public User setUserId(Integer newVal) {
+        userId = newVal;
         return this;
     }
 
@@ -106,12 +106,12 @@ public class User implements IEntity {
 
     @Override
     public String getTableName() {
-        return "USERLOGINS";
+        return TABLE_NAME;
     }
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
-        out.put("id", id);
+        out.put("UserId", userId);
         out.put("FirstName", firstName);
         out.put("LastName", lastName);
         out.put("PhysicalAddress", physicalAddress);
@@ -125,8 +125,8 @@ public class User implements IEntity {
 
     @Override
     public void setEntityValues(Map<String, Object> values) {
-        if(values.get("id") != null){
-            id = (Integer) values.get("id");
+        if(values.get("UserId") != null){
+            userId = (Integer) values.get("UserId");
         }
         if(values.get("FirstName") != null){
             firstName = (String) values.get("FirstName");
@@ -157,7 +157,7 @@ public class User implements IEntity {
     @Override
     public Map<String, Class> getEntityNameTypePairs() {
         Map<String,Class> out = new HashMap<>();
-        out.put("id", Integer.class);
+        out.put("UserId", Integer.class);
         out.put("FirstName", String.class);
         out.put("LastName", String.class);
         out.put("PhysicalAddress", String.class);
@@ -172,6 +172,11 @@ public class User implements IEntity {
     @Override
     public List<String> tableColumnCreationSettings() {
         return null; // TODO: this method
+    }
+
+    @Override
+    public int getId() {
+        return userId;
     }
 
 }

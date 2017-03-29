@@ -280,7 +280,7 @@ public class DerbyConnection {
         {
             DerbyConnection.setStatementValue(call, i, o);
             i++;
-        }        
+        }
         ResultSet results = call.executeQuery();
         
         int c=0;

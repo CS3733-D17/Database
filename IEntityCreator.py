@@ -4,7 +4,7 @@ class_name = 'User'
 # the name of the table that the entity is stored in
 table_name = 'USERLOGINS'
 # the type of each attribute and their names
-attribute_types_and_names = [('Integer', 'id'),
+attribute_types_and_names = [('Integer', 'userId'),
                              ('String', 'firstName'),
                              ('String', 'lastName'),
                              ('String', 'physicalAddress'),
@@ -64,7 +64,7 @@ for type, name in attribute_types_and_names:
 code += '''
 \t\t@Override
 \t\tpublic String getTableName() {{
-\t\t\treturn "{0}";
+\t\t\treturn TABLE_NAME;
 \t\t}}'''.format(table_name)
 
 

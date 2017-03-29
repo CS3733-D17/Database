@@ -6,6 +6,7 @@
 package com.slackers.inc.database;
 
 import com.slackers.inc.database.entities.LabelApplication;
+import com.slackers.inc.database.entities.User;
 
 import java.sql.SQLException;
 
@@ -22,31 +23,34 @@ public class ProjectDatabase{
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-        
-        LabelApplication app1 = new LabelApplication("Generic Wine 7", "John Doe");
-        
+
         DerbyConnection db = DerbyConnection.getInstance();
-        
-        if (!db.tableExists(app1.getTableName()))
-        {
-            db.createTable(app1.getTableName(), app1.tableColumnCreationSettings());
-        }
-        System.out.println(app1);
+        LoginVerification verify = new LoginVerification();
+
+        System.out.println("Bob is not in the database.");
+        System.out.println("Bob can log in : "
+                           + verify.verifyCredentials("bob@thebuilder.com", "build"));
+
+        User bobTheBuilder = new User()
+                .setEmailAddress("bob@thebuilder.com")
+                .setPassword("build")
+                .setFirstName("Bob")
+                .setLastName("the Builder")
+                .setBrandName("")
+                .setIsManufacturer(true)
+                .setPhysicalAddress("")
+                .setPhoneNumber("")
+                .setUserId(1);
+        db.createEntity(bobTheBuilder);
+
+        System.out.println("\nBob is now in the database.");
+        System.out.println("Bob can log in : "
+                           + verify.verifyCredentials("bob@thebuilder.com", "build"));
 
         for(int i = 0; i < 30; i++){
             db.writeEntity(getRandomApplication());
         }
 
-        db.writeEntity(app1, "BeverageName");
-        db.getEntity(app1, "BeverageName");
-        System.out.println(app1);
-        
-        app1.setSubmitter("Rob Smith");
-        db.writeEntity(app1, "BeverageName");
-        db.getEntity(app1, "BeverageName");
-        System.out.println(app1);
-        
-        db.closeConnection();
         db.shutdownDb();
     }
 
