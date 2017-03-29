@@ -22,6 +22,7 @@ public class LabelApplication implements IEntity{
     private String beverageName;
     private String submitter;
     private int id;
+    private Boolean isBeer;
     
     public LabelApplication(String beverageName, String submitter, Date submissionDate)
     {
@@ -62,8 +63,14 @@ public class LabelApplication implements IEntity{
     public void setSubmitter(String submitter) {
         this.submitter = submitter;
     }
-    
-    
+
+    public Boolean getIsBeer(){
+        return isBeer;
+    }
+
+    public void setIsBeer(boolean isBeer){
+        this.isBeer = isBeer;
+    }
     
     @Override
     public String getTableName() {
@@ -77,6 +84,7 @@ public class LabelApplication implements IEntity{
         out.put("BeverageName", this.beverageName);
         out.put("SubmittedDate", this.submissionDate);
         out.put("SubmitterName", this.submitter);
+        out.put("IsBeer", this.isBeer);
         return out;
     }
 
@@ -86,6 +94,7 @@ public class LabelApplication implements IEntity{
         out.put("BeverageName", this.beverageName);
         out.put("SubmittedDate", this.submissionDate);
         out.put("SubmitterName", this.submitter);
+        out.put("IsBeer", this.isBeer);
         return out;
     }
 
@@ -107,6 +116,9 @@ public class LabelApplication implements IEntity{
         {
             this.submitter = (String)values.get("SubmitterName");
         }
+        if(values.get("IsBeer")!=null){
+            this.isBeer = (Boolean) values.get("IsBeer");
+        }
     }
 
     @Override
@@ -116,6 +128,7 @@ public class LabelApplication implements IEntity{
         out.put("BeverageName", String.class);
         out.put("SubmittedDate", java.sql.Date.class);
         out.put("SubmitterName", String.class);
+        out.put("IsBeer", Boolean.class);
         return out;
     }
 
@@ -126,6 +139,7 @@ public class LabelApplication implements IEntity{
         cols.add("BeverageName varchar(256)");
         cols.add("SubmittedDate Date");
         cols.add("SubmitterName varchar(128)");
+        cols.add("IsBeer boolean");
         return cols;
     }
 

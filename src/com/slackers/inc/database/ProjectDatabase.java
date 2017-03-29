@@ -74,10 +74,18 @@ public class ProjectDatabase{
     static int index = 1;
 
    public static LabelApplication getRandomApplication(){
-       String beverageName = "Beer #" + index;
+       String beverageName;
+       if(index > 16){
+           beverageName = "Beer #" + index;
+       } else {
+           beverageName = "Wine #" + index;
+       }
+
        String companyName = "Company #" + index;
        index++;
-       return new LabelApplication(beverageName, companyName);
+       LabelApplication app = new LabelApplication(beverageName, companyName);
+       app.setIsBeer(index > 16);
+       return app;
    }
 
     
