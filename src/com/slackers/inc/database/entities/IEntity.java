@@ -14,7 +14,8 @@ import java.util.Map;
  */
 public interface IEntity {
     public String getTableName();
-    public Map<String,Object> getEntityValues();  
+    public Map<String,Object> getEntityValues();
+    public Map<String, Object> getUpdatableEntityValues();
     public void setEntityValues(Map<String,Object> values);
     public Map<String,Class> getEntityNameTypePairs();
     public List<String> tableColumnCreationSettings();

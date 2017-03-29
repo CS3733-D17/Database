@@ -83,7 +83,7 @@ public class DerbyConnection {
         StringBuilder vPlace = new StringBuilder();
         List<Object> vals = new LinkedList<>();
         boolean first = true;
-        for (Entry<String, Object> e : entity.getEntityValues().entrySet())
+        for (Entry<String, Object> e : entity.getUpdatableEntityValues().entrySet())
         {
             if (first)
             {
@@ -157,7 +157,7 @@ public class DerbyConnection {
         List<Object> condvals = new LinkedList<>();
         boolean first = true;
         boolean firstSet = true;
-        for (Entry<String, Object> e : entity.getEntityValues().entrySet())
+        for (Entry<String, Object> e : entity.getUpdatableEntityValues().entrySet())
         {
             if (cols.contains(e.getKey()))
             {
@@ -227,7 +227,6 @@ public class DerbyConnection {
             }
         }
         String stmt = String.format("SELECT * FROM %s WHERE %s", entity.getTableName(), conds.toString());
-        System.out.println(stmt);
         CallableStatement call = con.prepareCall(stmt);
         int i = 1;
         for (Object o : vals)
@@ -296,7 +295,6 @@ public class DerbyConnection {
 
     public boolean writeEntity(IEntity entity, String... searchColumns) throws SQLException
     {
-        System.out.println(this.entityExists(entity, searchColumns));
         if (this.entityExists(entity, searchColumns))
             return this.updateEntity(entity, searchColumns);
         else

@@ -112,7 +112,21 @@ public class User implements IEntity {
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
-        //out.put("UserId", userId);
+        out.put("UserId", userId);
+        out.put("FirstName", firstName);
+        out.put("LastName", lastName);
+        out.put("PhysicalAddress", physicalAddress);
+        out.put("PhoneNumber", phoneNumber);
+        out.put("EmailAddress", emailAddress);
+        out.put("IsManufacturer", isManufacturer);
+        out.put("Password", password);
+        out.put("BrandName", brandName);
+        return out;
+    }
+
+    @Override
+    public Map<String, Object> getUpdatableEntityValues() {
+        Map<String,Object> out = new HashMap<>();
         out.put("FirstName", firstName);
         out.put("LastName", lastName);
         out.put("PhysicalAddress", physicalAddress);

@@ -69,7 +69,16 @@ public class ProcessedApplication implements IEntity {
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
-        //out.put("id", id);
+        out.put("id", id);
+        out.put("ApplicationId", applicationId);
+        out.put("IsAccepted", isAccepted);
+        out.put("DateProcessed", dateProcessed);
+        return out;
+    }
+
+    @Override
+    public Map<String, Object> getUpdatableEntityValues() {
+        Map<String,Object> out = new HashMap<>();
         out.put("ApplicationId", applicationId);
         out.put("IsAccepted", isAccepted);
         out.put("DateProcessed", dateProcessed);

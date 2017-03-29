@@ -62,10 +62,11 @@ public class ProjectDatabase{
                         .setId(-1)
                         .setApplicationId(app.getId())
                         .setIsAccepted(false);
-                db.writeEntity(processed, "ApplicationId");
+                db.writeEntity(processed, "id");
             }
         }
 
+        db.getEntity(new ProcessedApplication().setId(3), "id");
 
         db.shutdownDb();
     }

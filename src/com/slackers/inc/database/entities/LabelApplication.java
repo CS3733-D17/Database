@@ -73,6 +73,16 @@ public class LabelApplication implements IEntity{
     @Override
     public Map<String, Object> getEntityValues() {
         Map<String,Object> out = new HashMap<>();
+        out.put("ApplicationId", this.id);
+        out.put("BeverageName", this.beverageName);
+        out.put("SubmittedDate", this.submissionDate);
+        out.put("SubmitterName", this.submitter);
+        return out;
+    }
+
+    @Override
+    public Map<String, Object> getUpdatableEntityValues() {
+        Map<String,Object> out = new HashMap<>();
         out.put("BeverageName", this.beverageName);
         out.put("SubmittedDate", this.submissionDate);
         out.put("SubmitterName", this.submitter);
