@@ -121,4 +121,11 @@ public class ProcessedApplication implements IEntity {
         return cols;
     }
 
+    @Override
+    public String toString() {
+        return "ProcessedApplication{" + "\n\tid=" + id + "\n\tapplicationId=" + applicationId + "\n\tisAccepted=" + isAccepted + "\n\tdateProcessed=" + dateProcessed + '}';
+    }
+
+    
+    
 }

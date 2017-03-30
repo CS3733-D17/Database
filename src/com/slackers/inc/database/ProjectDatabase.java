@@ -63,13 +63,23 @@ public class ProjectDatabase{
                         .setApplicationId(app.getId())
                         .setIsAccepted(false);
                 db.writeEntity(processed, "id");
+                System.out.println(processed);
             }
         }
+        
+        ProcessedApplication pApp;
 
-        db.getEntity(new ProcessedApplication().setId(3), "id");
-
+        for(int i = 0; i < 30; i++){
+            pApp = new ProcessedApplication().setId(i);
+            db.getEntity(pApp, "id");        
+            System.out.println("\n\nPROCESSED APPLICATION WITH ID "+i+"\n"+pApp.toString());
+        }
+        
+        
         db.shutdownDb();
     }
+    
+    
 
     static int index = 1;
 
